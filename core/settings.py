@@ -41,6 +41,15 @@ INSTALLED_APPS = [
     'api',
 ]
 
+
+REST_FRAMEWORK = { 
+    'DEAULT_PARSE_CLASS': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.renders.browsableAPIRenderer',
+    ]
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

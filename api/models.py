@@ -8,7 +8,17 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+            ordering = ['-created_at']
+
+    def get_price_in_euros(self):
+        return f'{self.price} €'
+    
+    def get_description(self):
+        return f'Description: {self.name} - {self.price} €'
     def __str__(self):
         return self.name
+    
+
     
     

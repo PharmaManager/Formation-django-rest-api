@@ -16,12 +16,16 @@ def product_api_view(request,pk=None, *args, **kwargs):
                 product = Product.objects.get(pk=pk)
             except Product.DoesNotExist:
                 return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
-            serializer = ProductSerializer(product)
+            
+            context = {'request': request}
+            serializer = ProductSerializer(product, context=context)
+             
             return Response(serializer.data, status=status.HTTP_200_OK)
         
         
         products = Product.objects.all()
-        serializer = ProductSerializer(products, many=True)
+        context = {'request': request}
+        serializer = ProductSerializer(products, many=True, context=context)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     if request.method == 'POST':
